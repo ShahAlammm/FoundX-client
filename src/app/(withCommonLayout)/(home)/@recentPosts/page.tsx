@@ -24,7 +24,7 @@ const RecentPost = async () => {
 
             </div>
             <div className="flex justify-center">
-                <Button className="rounded-md bg-default-900 text-default" size="md">
+                <Button className="rounded-md bg-default-900" size="md">
                     <Link href="/found-items">See All</Link>
                 </Button>
             </div>

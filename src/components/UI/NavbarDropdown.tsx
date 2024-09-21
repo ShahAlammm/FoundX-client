@@ -1,5 +1,8 @@
 "use client";
 
+import { protectedRoutes } from "@/src/constant";
+import { useUser } from "@/src/context/user.provider";
+import { logout } from "@/src/services/AuthServices";
 import { Avatar } from "@nextui-org/avatar";
 import {
     Dropdown,
@@ -8,10 +11,22 @@ import {
     DropdownTrigger,
 } from "@nextui-org/dropdown";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function NavbarDropdown() {
+    const pathname = usePathname();
     const router = useRouter();
+
+    const { user, setIsLoading: userLoading } = useUser();
+    console.log(user)
+
+    const handleLogout = () => {
+        logout();
+        userLoading(true);
+        if (protectedRoutes.some((route) => pathname.match(route))) {
+            router.push("/");
+        }
+    };
 
     const handleNavigation = (pathname: string) => {
         router.push(pathname);
@@ -20,7 +35,7 @@ export default function NavbarDropdown() {
     return (
         <Dropdown>
             <DropdownTrigger>
-                <Avatar isBordered className="cursor-pointer" name="Joe" />
+                <Avatar className="cursor-pointer" src={user?.profilePhoto} />
             </DropdownTrigger>
             <DropdownMenu aria-label="Static Actions">
                 <DropdownItem onClick={() => handleNavigation("/profile")}>
@@ -32,7 +47,12 @@ export default function NavbarDropdown() {
                 <DropdownItem onClick={() => handleNavigation("/profile/create-post")}>
                     Create Post
                 </DropdownItem>
-                <DropdownItem key="delete" className="text-danger" color="danger">
+                <DropdownItem
+                    onClick={() => handleLogout()}
+                    key="delete"
+                    className="text-danger"
+                    color="danger"
+                >
                     Logout
                 </DropdownItem>
             </DropdownMenu>
