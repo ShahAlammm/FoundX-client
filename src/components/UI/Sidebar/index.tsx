@@ -16,7 +16,19 @@ const Sidebar = () => {
         <div>
             <div className="rounded-xl bg-default-100 p-2">
                 <div className="h-[330px] w-full rounded-md">
-                    <Image src={user?.profilePhoto || "Empty"} alt="user" width={300} height={300} />
+
+                    {
+                        user?.profilePhoto ? (
+                            <Image
+                                src={user?.profilePhoto}
+                                alt="user"
+                                width={300}
+                                height={300}
+                            />
+                        ) : (
+                            <div className="h-[330px] w-full rounded-md bg-default-200"></div>
+                        )
+                    }
                 </div>
                 <div className="my-3">
                     <h1 className="text-2xl font-semibold">{user?.name}</h1>

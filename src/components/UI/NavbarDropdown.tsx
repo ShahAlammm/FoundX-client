@@ -18,7 +18,6 @@ export default function NavbarDropdown() {
     const router = useRouter();
 
     const { user, setIsLoading: userLoading } = useUser();
-    console.log(user)
 
     const handleLogout = () => {
         logout();
