@@ -66,3 +66,22 @@ export interface IInput {
   name: string;
   disabled?: boolean;
 }
+
+export interface IPost {
+  _id: string;
+  title: string;
+  description: string;
+  images: string[];
+  location: string;
+  city: string;
+  dateFound: string;
+  status: string;
+  isReported: boolean;
+  reportCount: number;
+  category: Category;
+  user: IUser;
+  questions: string[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
