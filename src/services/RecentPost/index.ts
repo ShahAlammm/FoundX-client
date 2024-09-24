@@ -13,7 +13,7 @@ export const getRecentPosts = async () => {
     fetchOption
   );
 
-  await delay(5000);
+  await delay(2000);
 
   return res.json();
 };

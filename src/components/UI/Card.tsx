@@ -1,25 +1,27 @@
 import { Button } from "@nextui-org/button";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
-import Image from "next/image";
 import { format } from 'date-fns';
 import { TItem } from "@/src/types";
+import { Image } from "@nextui-org/image";
 
 export default function ItemCard({ posts }: { posts: TItem }) {
     const { title, category, city, dateFound, images, _id, location } = posts;
     return (
         <Card isFooterBlurred className="h-[300px] w-full rounded-3xl">
-            <CardHeader className="absolute z-10 top-1 flex-col items-end">
-                <p className="text-tiny bg-default-900 px-1 rounded-lg text-default-100  uppercase font-bold">{category?.name}</p>
+            <CardHeader className="absolute top-1 z-10 flex-col items-start">
+                <p className="absolute top-1 right-2 rounded-full bg-black px-2 text-tiny uppercase text-white/90">
+                    {category?.name}
+                </p>
+                <h4 className="mt-2 rounded bg-black/30 p-1 text-xl font-medium text-white">
+                    {title}
+                </h4>
             </CardHeader>
-            <CardHeader className="absolute z-10 top-1 flex-col items-start">
-                <h4 className="text-black font-medium text-2xl">{title}</h4>
-            </CardHeader>
-            <Image
 
-                height={400}
-                width={300}
+            <Image
+                removeWrapper
                 alt="Card example background"
-                className="h-[80%] w-[90%]"
+
+                className="scale-120 z-0 h-full w-full -translate-y-6 object-cover"
                 src={images[0]}
             />
             <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
