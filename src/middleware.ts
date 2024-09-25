@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest } from "next/server";
 import { getCurrentUser } from "./services/AuthServices";
 
 const AuthRoutes = ["/login", "/register"];
@@ -11,11 +11,12 @@ const roleBasedRoutes = {
   ADMIN: [/^\/admin/],
 };
 
+// This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const user = await getCurrentUser();
-  // ----------------------------------------
+
   if (!user) {
     if (AuthRoutes.includes(pathname)) {
       return NextResponse.next();
@@ -25,7 +26,6 @@ export async function middleware(request: NextRequest) {
       );
     }
   }
-  // ----------------------------------------
 
   if (user?.role && roleBasedRoutes[user?.role as Role]) {
     const routes = roleBasedRoutes[user?.role as Role];

@@ -1,10 +1,10 @@
 import { Button } from "@nextui-org/button";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { format } from 'date-fns';
-import { TItem } from "@/src/types";
 import { Image } from "@nextui-org/image";
+import { IPost } from "@/src/types";
 
-export default function ItemCard({ posts }: { posts: TItem }) {
+export default function ItemCard({ posts }: { posts: IPost }) {
     const { title, category, city, dateFound, images, _id, location } = posts;
     return (
         <Card isFooterBlurred className="h-[300px] w-full rounded-3xl">
